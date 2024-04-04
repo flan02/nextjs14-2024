@@ -6,13 +6,13 @@ export default function Home() {
   return (
     <main className={styles.container}>
       <div className={styles.textContainer}>
-        <h1 className={styles.title}>Finance</h1>
+        <h1 className={styles.title}>Blog</h1>
         <p className={styles.desc}>
-          Control your finances with ease.
+          This blog will make you happy.
         </p>
         <div className={styles.buttons}>
-          <button className={styles.button}>Learn More</button>
-          <button className={styles.button}>Contact</button>
+          <button className={styles.button}>Learn More </button>
+          <button className="bg-purple-500 px-8 rounded-md">Contact </button>
         </div>
 
         <div className={styles.brands}>

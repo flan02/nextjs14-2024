@@ -1,12 +1,48 @@
+// "use client";
+import Image from "next/image";
+import styles from "./contact.module.css";
+// import dynamic from "next/dynamic";
+// import HydrationTest from "@/components/hydrationTest";
 
+// const HydrationTestNoSSR = dynamic(()=>import("@/components/hydrationTest"), {ssr: false})
 
+export const metadata = {
+  title: "Contact Page",
+  description: "Contact description",
+};
 
-type Props = {}
+const ContactPage = () => {
+  // const a = Math.random();
 
-const ContactPage = (props: Props) => {
+  // console.log(a);
+
   return (
-    <div>Contactpage</div>
-  )
-}
+    <div className={styles.container}>
+      <div className={styles.imgContainer}>
+        <Image src="/contact.png" alt=""
+          fill
+          sizes="(max-width: 600px) 100vw, 600px"
+          className={styles.img} />
+      </div>
+      <div className={styles.formContainer}>
+        {/* <HydrationTestNoSSR/> */}
+        {/* <div suppressHydrationWarning>{a}</div> */}
+        <form action="" className={styles.form}>
+          <input type="text" placeholder="Name and Surname" />
+          <input type="text" placeholder="Email Address" />
+          <input type="text" placeholder="Phone Number (Optional)" />
+          <textarea
+            name=""
+            id=""
+            cols={30}
+            rows={10}
+            placeholder="Message"
+          ></textarea>
+          <button>Send</button>
+        </form>
+      </div>
+    </div>
+  );
+};
 
-export default ContactPage
+export default ContactPage;

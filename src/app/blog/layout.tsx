@@ -7,7 +7,7 @@ const BlogLayout = ({ children }: Readonly<{
 }>) => {
   return (
     <div>
-      <h1>This is a BlogLayout</h1>
+      {/*<h1>This is a BlogLayout</h1>*/}
       {children}
     </div>
   )

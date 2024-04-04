@@ -1,0 +1,48 @@
+.form{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 30px;
+}
+
+.form input{
+  padding: 20px;
+  background-color: var(--bg);
+  color: var(--textColor);
+  border: none;
+  border-radius: 5px;
+}
+
+.form button{
+  padding: 20px;
+  cursor: pointer;
+  background-color: var(--btn);
+  color: var(--textColor);
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+}
+
+.githubBtn {
+  border: 1px solid #e1e5f0;
+  background-color: #fff;
+  width: 400px;
+  margin: 0 auto 16px;
+  padding: 20px 16px;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  font-weight: bold;
+}
+
+.githubBtn:hover {
+  border: 1px solid orange;
+  background-color: #ddd;
+  color: #111;
+}
+
+.githubBtn > div {
+  margin-left: 4px;
+}

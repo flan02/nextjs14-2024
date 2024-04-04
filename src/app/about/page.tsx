@@ -45,6 +45,7 @@ const AboutPage = () => {
           fill
           sizes="(max-width: 600px) 100vw, 600px"
           className={styles.img}
+          priority={true}
         />
       </div>
     </div>
