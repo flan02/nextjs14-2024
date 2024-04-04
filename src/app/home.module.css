@@ -40,12 +40,13 @@
   width: 500px;
   height: 50px;
   position: relative;
-  filter: grayscale(1);
+   /* filter: grayscale(1); */ 
 }
 
 .imgContainer {
   flex: 1;
   position: relative;
+  
 }
 
 @media (max-width: 1024px) {
