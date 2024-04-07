@@ -32,7 +32,7 @@ const login = async (credentials: Credentials) => {
 };
 
 export const {
-  //handlers: { GET , POST },
+  handlers: { GET, POST },
   auth,
   signIn,
   signOut,

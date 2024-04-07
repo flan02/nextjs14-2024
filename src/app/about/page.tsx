@@ -9,7 +9,7 @@ export const metadata = {
 
 const AboutPage = () => {
 
-  console.log("lets check where it works")
+  //console.log("lets check where it works - ServerSide CLI or ClientSide BrowserConsole")
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>

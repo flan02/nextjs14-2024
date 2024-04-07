@@ -6,9 +6,9 @@ export default function Home() {
   return (
     <main className={styles.container}>
       <div className={styles.textContainer}>
-        <h1 className={styles.title}>Blog</h1>
+        <h1 className={styles.title}>TvShows</h1>
         <p className={styles.desc}>
-          This blog will make you happy.
+          Reviews for the best movies and series. Find out what to watch next.
         </p>
         <div className={styles.buttons}>
           <button className={styles.button}>Learn More </button>

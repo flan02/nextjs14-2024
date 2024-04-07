@@ -2,24 +2,29 @@
 import styles from "./postUser.module.css";
 import Image from "next/image";
 
-// FETCH DATA WITH AN API
-// const getData = async (userId) => {
-//   const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}` ,{cache:"no-store"});
+type Props = {
+  userId: number;
+};
 
-//   if (!res.ok) {
-//     throw new Error("Something went wrong");
-//   }
 
-//   return res.json();
-// };
+// * FETCH DATA WITH AN EXTERNAL API
+const getData = async ({ userId }: Props) => {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, { cache: "no-store" });
 
-const PostUser = async ({ userId }: { userId: number }) => {
-  // FETCH DATA WITH AN API
-  // const user = await getData(userId);
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+
+  return res.json();
+};
+
+const PostUser = async ({ userId }: Props) => {
+  // * FETCH DATA WITH AN EXTERNAL API
+  const user = await getData({ userId });
 
   // FETCH DATA WITHOUT AN API
   //const user = await getUser(userId);
-  const user = { username: "John", img: "" };
+  //const user = { username: "John", img: "" };
   return (
     <div className={styles.container}>
       <Image
@@ -28,6 +33,7 @@ const PostUser = async ({ userId }: { userId: number }) => {
         alt=""
         width={50}
         height={50}
+        priority={true}
       />
       <div className={styles.texts}>
         <span className={styles.title}>Author</span>

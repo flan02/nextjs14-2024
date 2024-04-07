@@ -10,13 +10,16 @@
 }
 
 .imgContainer{
+  position: relative;
   width: 90%;
   height: 400px;
-  position: relative;
+  border: 1px solid white;
+  margin-top: 1rem;
 }
 
 .img{
   object-fit: cover;
+ 
 }
 
 .date{

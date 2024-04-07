@@ -7,6 +7,7 @@ const nextConfig = {
         hostname: "www.pexels.com",
       },
     ],
+    domains: ["res.cloudinary.com"],
   },
 };
 
