@@ -1,17 +1,27 @@
-import mongoose from "mongoose"
+import mongoose, { MongooseError } from "mongoose"
 
-const connection = {};
+type Conn = {
+  isConnected: number | null
+}
+
+const connection: Conn = {
+  isConnected: null,
+};
+
+const MONGO_URL_CONN = process.env.MONGO_URL_CONN || ""
 
 export const connectToDb = async () => {
   try {
-    if(connection.isConnected) {
+    if (connection.isConnected) {  // * If connection is already established, return
       console.log("Using existing connection");
       return;
     }
-    const db = await mongoose.connect(process.env.MONGO);
-    connection.isConnected = db.connections[0].readyState;
-  } catch (error) {
-    console.log(error);
+    const db = await mongoose.connect(MONGO_URL_CONN);
+    connection.isConnected = db.connections[0].readyState; // * Set connection state
+  } catch (error: any) {
+    if (error instanceof MongooseError) {
+      console.log(error);
+    }
     throw new Error(error);
   }
 };

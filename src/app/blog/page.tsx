@@ -1,67 +1,176 @@
 import React from 'react';
 import PostCard from "@/components/postCard/PostCard";
 import styles from "./blog.module.css";
-import { getPosts } from '@/lib/data';
+import { getMovies } from '@/lib/data';
 
 
-type Post = {
-  id: number
-  title: string
-  body: string
-  userId?: number | null
-  img?: string | null
-  createdAt?: string | null
-  slug?: string | null
-
-}
-
-
-
-
-interface Params {
-  params: string;
-  searchParams: string;
-}
-
-// FETCH DATA WITH AN API
-/*
-const getData = async () => {
-
-  // $ Data Fetching Behaviours...
-  // * Calling to Fake API
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts", { cache: "force-cache" }); // ? Cached per default, doesn't need to be specified 2nd parameter
-  const resNoCached = await fetch("https://jsonplaceholder.typicode.com/posts", { cache: "no-cache" }); // ? Not Cached, we define this request in our 2nd parameter
-  const resNoStored = await fetch("https://jsonplaceholder.typicode.com/posts", { cache: "no-store" }); // ? Not Stored, It's not stored in the cache each fetch is a new request
-
-  // * Calling to Server API
-  //const res = await fetch("http://localhost:3000/api/blog", { next: { revalidate: 3600 } }); // ? Refresh data every 1 hour
-
-  if (!res.ok) {
-    throw new Error("Something went wrong");
+type typeAward = {
+  wins: {
+    type: Number,
+    required: true,
+  },
+  nominations: {
+    type: Number,
+    required: true,
+  },
+  text: {
+    type: String,
+    required: true,
   }
 
-  ;
-  return res.json();
-};
-*/
+}
+
+type typeIMDB = {
+  rating: {
+    type: Number,
+    required: true,
+  },
+  votes: {
+    type: Number,
+    required: true,
+  },
+  id: {
+    type: Number,
+    required: true,
+  },
+}
+
+type typeTomatoes = {
+  viewer: {
+    rating: {
+      type: Number,
+      required: true,
+    },
+    numReviews: {
+      type: Number,
+      required: true,
+    },
+    meter: {
+      type: Number,
+      required: true,
+    },
+  },
+  fresh: {
+    type: Number,
+    required: false
+  },
+  critic: {
+    rating: {
+      type: Number,
+      required: true,
+    },
+    numReviews: {
+      type: Number,
+      required: true,
+    },
+    meter: {
+      type: Number,
+      required: true,
+    },
+  },
+}
+interface IMovie {
+  _id: {
+    type: Number,
+    required: true,
+  },
+  plot: {
+    type: String,
+    required: true,
+  },
+  genres: {
+    type: [String],
+    required: true,
+  },
+  runtime: {
+    type: Number,
+    required: true,
+  },
+  cast: {
+    type: [String],
+    required: true,
+  },
+  poster: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  fullplot: {
+    type: String,
+    required: true,
+  },
+  languages: {
+    type: [String],
+    required: true,
+  },
+  released: {
+    type: Date,
+    required: true,
+  },
+  directors: {
+    type: [String],
+    required: true,
+  },
+  rated: {
+    type: String,
+    required: true,
+  },
+  awards: {
+    type: typeAward,
+  },
+  lastupdated: {
+    type: String,
+    required: true,
+  },
+  year: {
+    type: Number,
+    required: true,
+  },
+  imdb: {
+    type: typeIMDB,
+    required: true,
+  },
+  countries: {
+    type: [String],
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+  tomatoes: {
+    type: typeTomatoes,
+    required: true,
+  },
+  num_mflix_comments: {
+    type: Number,
+    required: true,
+  },
+}
+
+
+
+
+
+
+
+
 const BlogPage = async () => {
-  // const BlogPage = ({ params, searchParams }: Params) => {
 
-  // console.log(params, searchParams); // http://localhost:3000/blog?q=test    {q: 'test'}
 
-  // ? FETCH DATA WITH AN EXTERNAL API
-  //const posts = await getData();
-
-  // ? FETCH DATA WITHOUT AN API
-  const posts = await getPosts();
-
+  // ? FETCH DATA FROM A DATABASE
+  const movies: IMovie[] = await getMovies();
+  console.log(movies);
   return (
     <div className={styles.container}>
       {
 
-        posts.map((post: Post) => (
-          <div className={styles.post} key={post?.id}>
-            <PostCard post={post} />
+        movies.map((movie: IMovie) => (
+          <div className={styles.post} key={Math.random() * 1000} >
+            {/* <PostCard post={movie} />*/}
           </div>
         ))
 
