@@ -1,5 +1,6 @@
 import mongoose, { MongooseError } from "mongoose"
 
+
 type Conn = {
   isConnected: number | null
 }
@@ -8,7 +9,8 @@ const connection: Conn = {
   isConnected: null,
 };
 
-const MONGO_URL_CONN = process.env.MONGO_URL_CONN || ""
+const MONGODB_URL = process.env.MONGODB_URL || ""
+//console.log("String to database connection is:", MONGODB_URL);
 
 export const connectToDb = async () => {
   try {
@@ -16,7 +18,7 @@ export const connectToDb = async () => {
       console.log("Using existing connection");
       return;
     }
-    const db = await mongoose.connect(MONGO_URL_CONN);
+    const db = await mongoose.connect(MONGODB_URL);
     connection.isConnected = db.connections[0].readyState; // * Set connection state
   } catch (error: any) {
     if (error instanceof MongooseError) {

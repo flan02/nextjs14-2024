@@ -26,7 +26,7 @@ export default function Home() {
         <Image
           src="/hero.gif"
           alt="Homepage Image"
-
+          unoptimized={true}
           sizes="(max-width: 600px) 100vw, 400px"
           width={500}
           height={500}

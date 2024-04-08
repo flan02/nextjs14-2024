@@ -6,8 +6,10 @@ export const getMovies = async () => {
 
   try {
     connectToDb();
-    const movies = await Movie.find();
-    console.log(movies);
+    //console.log("Fetching Movies from MongoDB.........");
+    const movies = await Movie.find().limit(100);
+    // console.log(movies);
+
     return movies;
   } catch (err) {
     console.log(err);

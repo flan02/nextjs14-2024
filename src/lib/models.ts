@@ -42,7 +42,7 @@ const Award = new mongoose.Schema({
     type: String,
     required: true,
   }
-});
+}, { _id: false });
 
 const IMDB = new mongoose.Schema({
   rating: {
@@ -57,7 +57,7 @@ const IMDB = new mongoose.Schema({
     type: Number,
     required: true,
   }
-});
+}, { _id: false });
 
 const Tomatoes = new mongoose.Schema({
   viewer: {
@@ -152,7 +152,8 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   awards: {
-    type: Object, Award
+    type: Award,
+    required: true,
   },
   lastupdated: {
     type: String,
@@ -163,7 +164,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   imdb: {
-    type: Object, IMDB,
+    type: IMDB,
     required: true,
   },
   countries: {
@@ -175,7 +176,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   tomatoes: {
-    type: Object, Tomatoes,
+    type: Tomatoes,
     required: true,
   },
   num_mflix_comments: {

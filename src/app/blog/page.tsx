@@ -2,7 +2,13 @@ import React from 'react';
 import PostCard from "@/components/postCard/PostCard";
 import styles from "./blog.module.css";
 import { getMovies } from '@/lib/data';
+import Image from 'next/image';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import { STATUS_CODES } from 'http';
 
+type typeImage = {
+  src: String
+}
 
 type typeAward = {
   wins: {
@@ -91,7 +97,8 @@ interface IMovie {
     required: true,
   },
   poster: {
-    type: String,
+    //src: string;
+    type: string,
     required: true,
   },
   title: {
@@ -163,17 +170,29 @@ const BlogPage = async () => {
 
   // ? FETCH DATA FROM A DATABASE
   const movies: IMovie[] = await getMovies();
-  console.log(movies);
+
+  //console.log("Movie data in frontend", movies);
+  // "https://m.media-amazon.com/images/M/MV5BMTU3NjE5NzYtYTYyNS00MDVmLWIwYjgtMmYwYWIxZDYyNzU2XkEyXkFqcGdeQXVyNzQzNzQxNzI@._V1_SY1000_SX677_AL_.jpg"
+  //console.log(movies[10].poster);
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} mt-2`}>
       {
 
         movies.map((movie: IMovie) => (
-          <div className={styles.post} key={Math.random() * 1000} >
+          <div key={Math.random() * 1000} className='mt-2'>
+
+
+            <>
+              <h2 className='text-white text-xl font-bold'>{(movie.title as string).length < 30 ? movie.title : (movie.title as string).slice(0, 27) + "..."}</h2>
+              <div className={styles.post} >
+                <img className='absolute h-[298px] w-[300px]' src={(movie.poster) ? movie.poster : "/image-notfound.png"} alt={`${movie.lastupdated}`} fill="true" sizes="(max-width: 768px) 100vw, 33vw" priority="true" />
+              </div>
+            </>
+
+
             {/* <PostCard post={movie} />*/}
           </div>
         ))
-
       }
     </div>
   );
