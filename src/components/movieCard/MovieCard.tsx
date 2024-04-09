@@ -1,8 +1,6 @@
-import React from 'react';
-import styles from "./blog.module.css";
-import { getMovies } from '@/lib/data';
+/* eslint-disable @next/next/no-img-element */
+import styles from "./postCard.module.css"
 
-import MovieCard from '@/components/movieCard/MovieCard';
 
 type typeImage = {
   src: String
@@ -73,6 +71,7 @@ type typeTomatoes = {
     },
   },
 }
+
 interface IMovie {
   _id: {
     type: Number,
@@ -158,27 +157,16 @@ interface IMovie {
 
 
 
+const MovieCard = ({ movie }: any) => {
 
-
-
-
-
-const BlogPage = async () => {
-
-
-  // ? FETCH DATA FROM A DATABASE
-  const movies: IMovie[] = await getMovies();
   return (
-    <div className={`${styles.container} mt-2`}>
-      {
-
-        movies.map((movie: IMovie) => (
-          <MovieCard movie={movie} key={Math.random() * 1000} />
-
-        ))
-      }
+    <div className='mt-2'>
+      <h2 className='text-white text-xl font-bold mb-1'>{`${(movie.title as unknown as string).length < 30 ? movie.title : (movie.title as unknown as string).slice(0, 27) + "..."}`}</h2>
+      <div className={styles.movie} >
+        <img className='absolute h-[298px] w-[300px]' src={(movie.poster) ? movie.poster : "/image-notfound.png"} alt={`${movie.lastupdated}`} />
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default BlogPage;
+export default MovieCard
