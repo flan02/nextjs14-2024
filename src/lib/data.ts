@@ -1,6 +1,8 @@
+import { IMovie } from "@/app/blog/page";
 import { User, Movie } from "./models";
-import { connectToDb } from "./utils";
+import { connectToDb, disconnectFromDb } from "./utils";
 import { unstable_noStore as noStore } from "next/cache";
+import { isValidObjectId } from "mongoose";
 
 export const getMovies = async () => {
 
@@ -9,7 +11,7 @@ export const getMovies = async () => {
     //console.log("Fetching Movies from MongoDB.........");
     const movies = await Movie.find().limit(100);
     // console.log(movies);
-
+    //disconnectFromDb();
     return movies;
   } catch (err) {
     console.log(err);
@@ -17,11 +19,13 @@ export const getMovies = async () => {
   }
 };
 
-export const getMovie = async (slug: string) => {
+export const getMovie = async (slug: string): Promise<IMovie | null> => {
 
   try {
     connectToDb();
-    const movie = await Movie.findOne({ slug });
+    const movie = await Movie.findById(slug);
+    //console.log(movie);
+    //disconnectFromDb();
     return movie;
   } catch (err) {
     console.log(err);
@@ -36,6 +40,7 @@ export const getUser = async (id: string) => {
   try {
     connectToDb();
     const user = await User.findById(id);
+    //disconnectFromDb();
     return user;
   } catch (err) {
     console.log(err);
@@ -47,6 +52,7 @@ export const getUsers = async () => {
   try {
     connectToDb();
     const users = await User.find();
+    disconnectFromDb();
     return users;
   } catch (err) {
     console.log(err);

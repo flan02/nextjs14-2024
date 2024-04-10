@@ -73,7 +73,7 @@ type typeTomatoes = {
     },
   },
 }
-interface IMovie {
+export interface IMovie {
   _id: {
     type: Number,
     required: true,
@@ -91,6 +91,7 @@ interface IMovie {
     required: true,
   },
   cast: {
+    [x: string]: any;
     type: [String],
     required: true,
   },

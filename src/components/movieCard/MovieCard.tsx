@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link"
 import styles from "./postCard.module.css"
 
 
@@ -165,6 +166,9 @@ const MovieCard = ({ movie }: any) => {
       <div className={styles.movie} >
         <img className='absolute h-[298px] w-[300px]' src={(movie.poster) ? movie.poster : "/image-notfound.png"} alt={`${movie.lastupdated}`} />
       </div>
+      <br />
+      <Link href={`blog/${movie._id}`} className={styles.link}>READ MORE
+      </Link>
     </div>
   )
 }

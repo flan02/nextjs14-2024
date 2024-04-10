@@ -1,40 +1,18 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
+
 import styles from "./singlePost.module.css";
-//import PostUser from "@/components/postUser/postUser";
+
 import { Suspense } from "react";
+import { getMovie } from "@/lib/data";
+import Link from "next/link";
 import PostUser from "@/components/postUser/postUser";
-import { getPost } from "@/lib/data";
 
 
-// * Dynamic route page
-type Post = {
-  id: number
-  title: string
-  body: string
-  userId: number
-  img?: string | null
-  createdAt?: string | null
-  slug?: string | null
-
-}
 
 interface Params {
   slug: string;
 }
 
-
-
-// FETCH DATA WITH AN API
-const getData = async (slug: string) => {
-  //const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
-
-  if (!res.ok) {
-    throw new Error("Something went wrong");
-  }
-
-  return res.json();
-};
 
 export const generateMetadata = async ({ params }: { params: Params }) => {
   const { slug } = params;
@@ -49,21 +27,69 @@ export const generateMetadata = async ({ params }: { params: Params }) => {
 
 const SinglePostPage = async ({ params }: { params: Params }) => {
   const { slug } = params;
-  // console.log(params)
+
+  const movie = await getMovie(slug);
+  //console.log(movie);
+  return (
+    <>
+      {
+        movie
+          ?
+          <div className={styles.container}>
+            {
+              movie.poster && (
+                <div className={styles.imgContainer}>
+                  <img src={movie.poster as unknown as string} alt="" className={styles.img} />
+                </div>
+              )
+
+            }
+            <div className={styles.textContainer}>
+              <h1 className={styles.title}>{`${movie.title}`}</h1>
+              <div className={styles.detail}>
+                {
+                  // * LAZY LOADING FOR WRAPPED COMPONENT
+                  movie && (
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <PostUser directors={(movie.directors as unknown as string[])} />
+                    </Suspense>
+                  )
+                }
+                <div className={styles.detailText}>
+                  <span className={styles.detailTitle}>Published</span>
+                  <span className={styles.detailValue}>{`${(movie.lastupdated as unknown as string).slice(0, 16)}`}</span>
+                </div>
+              </div>
+              <div className={styles.content}>
+                <span className={styles.detailTitle}>Plot:</span>
+                <p>
+                  {`${movie.plot}`}
+                </p>
+                <br />
+                <p>
+                  <span className={styles.detailTitle}>
+                    Cast:
+                  </span>
+                  &nbsp; {`${(movie.cast as unknown as string[]) ? movie.cast.join(", ") : "unknown"}`}
+                </p>
+                <p>
+                  <span className={styles.detailTitle}>
+                    Release year:
+                  </span>
+                  &nbsp; {`${movie.year}`}
+                </p>
+              </div>
+              <Link href="/blog" className="bg-white mb-4 px-4 py-2 w-max rounded-md text-blue-800 font-bold hover:bg-blue-800 hover:text-white hover:font-bold hover:border-2 hover:border-white">Go back</Link>
+
+            </div>
+          </div>
+          : <p>No movie founded.</p>
+      }
+    </>
+  )
 
 
-  // * FETCH DATA WITH AN EXTERNAL API
   /*
-  const post = await getData(slug);
-  post.img = "https://res.cloudinary.com/dhbig9jt8/image/upload/v1710278657/ksvykiyh9whhpd8dsajz.png"; // ? It will come from real bbdd by now I add a propertie to the object with a random image.
-  post.createdAt = new Date().toString().slice(4, 16)
-  //console.log(post);
-  */
-
-  // * FETCH DATA WITHOUT AN API. FROM OUR FAKE FILE data.ts
-  const post: Post = await getPost(parseInt(slug));
-  post.img = "https://res.cloudinary.com/dhbig9jt8/image/upload/v1710278657/ksvykiyh9whhpd8dsajz.png"; // ? It will come from real bbdd by now I add a propertie to the object with a random image.
-  post.createdAt = new Date().toString().slice(4, 16)
   return (
     <div className={styles.container}>
       {
@@ -100,6 +126,7 @@ const SinglePostPage = async ({ params }: { params: Params }) => {
       </div>
     </div>
   );
+  */
 };
 
 export default SinglePostPage;

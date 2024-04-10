@@ -3,12 +3,13 @@ import styles from "./postUser.module.css";
 import Image from "next/image";
 
 type Props = {
-  userId: number;
+  directors: string[];
 };
 
 
-// * FETCH DATA WITH AN EXTERNAL API
-const getData = async ({ userId }: Props) => {
+// * FETCH DATA WITH AN EXTERNAL API - jsonplaceholder
+/*
+const getData = async ({ directors }: Props) => {
   const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, { cache: "no-store" });
 
   if (!res.ok) {
@@ -17,27 +18,26 @@ const getData = async ({ userId }: Props) => {
 
   return res.json();
 };
+*/
 
-const PostUser = async ({ userId }: Props) => {
+const PostUser = async ({ directors }: Props) => {
   // * FETCH DATA WITH AN EXTERNAL API
-  const user = await getData({ userId });
+  //const user = await getData({ userId });
+  //console.log(directors);
 
-  // FETCH DATA WITHOUT AN API
-  //const user = await getUser(userId);
-  //const user = { username: "John", img: "" };
   return (
     <div className={styles.container}>
       <Image
         className={styles.avatar}
-        src={user.img ? user.img : "/noavatar.png"}
+        src={"/noavatar.png"}
         alt=""
         width={50}
         height={50}
         priority={true}
       />
       <div className={styles.texts}>
-        <span className={styles.title}>Author</span>
-        <span className={styles.username}>{user.username}</span>
+        <span className={styles.title}>Director/s</span>
+        <span className={styles.username}>{directors ? directors.join(", ") : "unknown"}</span>
       </div>
     </div>
   );

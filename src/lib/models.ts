@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import { IMovie } from "@/app/blog/page";
+import mongoose, { Schema, Document, Types } from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
@@ -102,9 +103,9 @@ const Tomatoes = new mongoose.Schema({
   }
 });
 
-const movieSchema = new mongoose.Schema({
+const movieSchema = new Schema<IMovie & Document>({
   _id: {
-    type: Object,
+    type: Types.ObjectId,
     required: true,
   },
   plot: {
@@ -189,36 +190,7 @@ const movieSchema = new mongoose.Schema({
   });
 
 
-
-/*
-const postSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: true,
-    },
-    desc: {
-      type: String,
-      required: true,
-    },
-    img: {
-      type: String,
-    },
-    userId: {
-      type: String,
-      required: true,
-    },
-    slug: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-  },
-  { timestamps: true }
-);
-*/
-
 export const User = mongoose.models?.User || mongoose.model("User", userSchema);
 export const Movie = mongoose.models?.Movie || mongoose.model("Movie", movieSchema);
-// export const Post = mongoose.models?.Post || mongoose.model("Post", postSchema);
+
 
