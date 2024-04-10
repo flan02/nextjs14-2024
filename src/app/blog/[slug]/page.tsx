@@ -1,13 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 
 import styles from "./singlePost.module.css";
-
 import { Suspense } from "react";
 import { getMovie } from "@/lib/data";
 import Link from "next/link";
 import PostUser from "@/components/postUser/postUser";
-
-
+import { Metadata } from "next";
 
 interface Params {
   slug: string;
@@ -17,18 +15,18 @@ interface Params {
 export const generateMetadata = async ({ params }: { params: Params }) => {
   const { slug } = params;
 
-  //const post = await getPost(slug);
-  const post = { title: "Post 1", desc: "This is post 1" }
+  const movie = await getMovie(slug); // ? The fetch to the API or query to database only happens one time while their are the same.
+
   return {
-    title: post.title,
-    description: post.desc,
+    title: movie?.title || "Movie not found",
+    description: movie?.plot || "No description available",
   };
 };
 
 const SinglePostPage = async ({ params }: { params: Params }) => {
   const { slug } = params;
 
-  const movie = await getMovie(slug);
+  const movie = await getMovie(slug); // ? The fetch to the API or query to database only happens one time while their are the same.
   //console.log(movie);
   return (
     <>

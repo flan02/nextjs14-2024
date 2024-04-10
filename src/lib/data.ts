@@ -11,7 +11,7 @@ export const getMovies = async () => {
     //console.log("Fetching Movies from MongoDB.........");
     const movies = await Movie.find().limit(100);
     // console.log(movies);
-    //disconnectFromDb();
+    //disconnectFromDb(); // ? this fc only must be called when you are done with the db. e.g. when you close your user session
     return movies;
   } catch (err) {
     console.log(err);
@@ -25,7 +25,7 @@ export const getMovie = async (slug: string): Promise<IMovie | null> => {
     connectToDb();
     const movie = await Movie.findById(slug);
     //console.log(movie);
-    //disconnectFromDb();
+    //disconnectFromDb(); // ? this fc only must be called when you are done with the db. e.g. when you close your user session
     return movie;
   } catch (err) {
     console.log(err);
@@ -36,11 +36,11 @@ export const getMovie = async (slug: string): Promise<IMovie | null> => {
 };
 
 export const getUser = async (id: string) => {
-  // noStore();
+  // noStore(); // ? this fc stops the caching of the data when you don't use a API and the data is provided by the server itself
   try {
     connectToDb();
     const user = await User.findById(id);
-    //disconnectFromDb();
+    //disconnectFromDb(); // ? this fc only must be called when you are done with the db. e.g. when you close your user session
     return user;
   } catch (err) {
     console.log(err);
@@ -52,7 +52,7 @@ export const getUsers = async () => {
   try {
     connectToDb();
     const users = await User.find();
-    disconnectFromDb();
+    // disconnectFromDb(); // ? this fc only must be called when you are done with the db. e.g. when you close your user session
     return users;
   } catch (err) {
     console.log(err);

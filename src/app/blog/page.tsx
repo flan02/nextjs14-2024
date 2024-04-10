@@ -1,8 +1,14 @@
 import React from 'react';
 import styles from "./blog.module.css";
 import { getMovies } from '@/lib/data';
-
 import MovieCard from '@/components/movieCard/MovieCard';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Movie Page",
+  description: "About description",
+};
+
 
 type typeImage = {
   src: String
@@ -156,13 +162,6 @@ export interface IMovie {
     required: true,
   },
 }
-
-
-
-
-
-
-
 
 const BlogPage = async () => {
 
