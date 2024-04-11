@@ -1,4 +1,4 @@
-import React from 'react';
+
 import styles from "./blog.module.css";
 import { getMovies } from '@/lib/data';
 import MovieCard from '@/components/movieCard/MovieCard';
@@ -167,7 +167,16 @@ const BlogPage = async () => {
 
 
   // ? FETCH DATA FROM A DATABASE
-  const movies: IMovie[] = await getMovies();
+  //const movies: IMovie[] = await getMovies();
+
+  // ? FETCH DATA FROM A NEXTJS API
+  const res = await fetch('http://localhost:3000/api/blog', { next: { revalidate: 3600 } })
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch movies');
+  }
+  const movies = await res.json();
+
   return (
     <div className={`${styles.container} mt-2`}>
       {

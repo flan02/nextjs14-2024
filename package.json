@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sentry/nextjs": "^7.109.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/mongoose": "^5.11.97",
     "bcryptjs": "^2.4.3",
