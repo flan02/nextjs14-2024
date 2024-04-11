@@ -1,9 +1,11 @@
 import { IMovie } from "@/app/blog/page";
 import mongoose, { Schema, Document, Types } from "mongoose";
+import { typeUser } from "./action";
 
-const userSchema = new mongoose.Schema(
+// TODO I modify the user Schema to add userId
+const userSchema = new Schema<typeUser & Document>(
   {
-    username: {
+    name: {
       type: String,
       required: true,
       unique: true,
@@ -18,16 +20,13 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
+      required: true,
     },
-    img: {
-      type: String,
+    idUser: {
+      type: Number,
+      required: false,
     },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  { timestamps: true }
+  }
 );
 
 const Award = new mongoose.Schema({
@@ -103,6 +102,7 @@ const Tomatoes = new mongoose.Schema({
   }
 });
 
+// TODO The original schema was Post but I changed it to Movie for the new Branch
 const movieSchema = new Schema<IMovie & Document>({
   _id: {
     type: Types.ObjectId,

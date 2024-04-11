@@ -97,3 +97,40 @@ async function main() {
 // Llamar a la función principal
 main().catch(console.error);
 ```
+
+# INSERTAR UN NUEVO DOCUMENTO A UNA COLECCION USANDO MONGOOSE
+
+```ts
+export const addUser = async (formData: FormData) => {
+  'use server'  // ? this is a nextjs feature to use server side code
+  const newUser: typeUser = Object.fromEntries(formData) as unknown as typeUser;
+  //console.log(formData); // ? shows an array of objects with key:value format with $ACTION_ID name, email, password, idUser
+  //console.log(newUser); // ? shows 1 object with $ACTION_ID, name, email, password, idUser
+  console.log("idUser data typeof is: ", typeof newUser.idUser);
+
+  const idUser = parseInt(newUser.idUser.toString())
+
+  try {
+    connectToDb();
+    const addUser = new User({
+      name: newUser.name,
+      email: newUser.email,
+      password: newUser.password,
+      idUser
+    })
+
+
+    await addUser.save();
+    console.log("saved to db");
+    revalidatePath("/blog");
+    revalidatePath("/admin");
+
+
+
+  } catch (err) {
+    console.log(err);
+    return { error: "Something went wrong!" };
+  }
+
+}
+```

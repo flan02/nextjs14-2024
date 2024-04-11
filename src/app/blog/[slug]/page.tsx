@@ -28,6 +28,7 @@ const SinglePostPage = async ({ params }: { params: Params }) => {
 
   const movie = await getMovie(slug); // ? The fetch to the API or query to database only happens one time while their are the same.
   //console.log(movie);
+
   return (
     <>
       {
