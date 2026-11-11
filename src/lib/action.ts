@@ -1,4 +1,4 @@
-"use server"; // $ Define a function as a server action
+//"use server"; // $ Define a function as a server action
 // TODO if you'll 'use server' in many functions, you can move it to the top of the file instead to add the directive in each function
 
 import { revalidatePath } from "next/cache";
@@ -10,7 +10,7 @@ import { User, Movie } from "./models";
 
 
 export const useServer = async () => {
-  //'use server' // $ Define a single function as a server action 
+  'use server' // $ Define a single function as a server action 
   console.log("This is a server action")
 }
 
@@ -34,7 +34,7 @@ export interface IMovieData {
 */
 
 export const addUser = async (formData: FormData): Promise<typeUser | void> => {
-  // 'use server'
+  'use server'
   const newUser: typeUser = Object.fromEntries(formData) as unknown as typeUser;
   //console.log(formData); // ? shows an array of objects with key:value format with $ACTION_ID name, email, password, idUser
   //console.log(newUser); // ? shows 1 object with $ACTION_ID, name, email, password, idUser

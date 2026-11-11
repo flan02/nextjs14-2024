@@ -1,4 +1,3 @@
-
 import styles from "./blog.module.css";
 import { getMovies } from '@/lib/data';
 import MovieCard from '@/components/movieCard/MovieCard';

@@ -1,7 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverComponentsExternalPackages: ["@sentry/nextjs", "@sentry/node"],
+    optimizePackageImports: [
+      "@sentry/core",
+      "@sentry/nextjs",
+      "@sentry/react",
+      "@sentry/node",
+    ],
+    serverComponentsExternalPackages: [
+      "@sentry/nextjs",
+      "@sentry/node",
+      "@sentry/react",
+      "@sentry/core",
+    ],
   },
   images: {
     remotePatterns: [
